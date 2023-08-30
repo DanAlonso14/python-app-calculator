@@ -4,19 +4,19 @@ jobs:
   build:
     working_directory: ~/python-app-calculator
     docker:
-      - image: "circleci/python:3.6.4"
+      - image: "cimg/python:3.8.4"
     steps:
       - checkout
       - run:
            name: Install dependencies
            command: |
-               pipenv --three
-               pipenv install
+               pipenv install pytest
+               pipenv install flask
       - run: python3 app.py
   test:
     working_directory: ~/python-app-calculator
     docker:
-      - image: "circleci/python:3.6.4"
+      - image: "cimg/python:3.6.4"
     steps:
       - checkout
       - run: python3 calculator_test.py
