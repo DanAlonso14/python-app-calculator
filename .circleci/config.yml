@@ -1,0 +1,24 @@
+version: 2.1
+
+jobs:
+  build:
+    working_directory: ~/python-app-calculator
+    docker:
+      - image: "circleci/python:3.6.4"
+    steps:
+      - checkout
+      - run: python3 app.py
+  test:
+    working_directory: ~/python-app-calculator
+    docker:
+      - image: "circleci/python:3.6.4"
+    steps:
+      - checkout
+      - run: python3 calculator_test.py
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
