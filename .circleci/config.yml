@@ -7,6 +7,11 @@ jobs:
       - image: "circleci/python:3.6.4"
     steps:
       - checkout
+      - run:
+           name: Install dependencies
+           command: |
+               pipenv --three
+               pipenv install
       - run: python3 app.py
   test:
     working_directory: ~/python-app-calculator
