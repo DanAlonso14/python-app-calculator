@@ -10,7 +10,6 @@ jobs:
       - run:
            name: Install dependencies
            command: |
-               echo 'export PATH=~$PATH:~./local/bin' >> $BASH_ENV && source $BASH_NEW
                pip install --user -r requirements.txt
       - run: 
            name: Run Unit test
