@@ -1,7 +1,7 @@
 version: 2.1
 
 jobs:
-  build:
+  run_tests:
     working_directory: ~/python-app-calculator
     docker:
       - image: "cimg/python:3.8.4"
@@ -10,20 +10,17 @@ jobs:
       - run:
            name: Install dependencies
            command: |
-               pipenv install pytest
-               pipenv install flask
-      - run: python3 app.py
-  test:
-    working_directory: ~/python-app-calculator
-    docker:
-      - image: "cimg/python:3.6.4"
-    steps:
-      - checkout
-      - run: python3 calculator_test.py
+               echo 'export PATH=~$PATH:~./local/bin' >> $BASH_ENV && source $BASH_NEW
+               pip install --user -r requirements.txt
+      - run: 
+           name: Run Unit test
+           command: |
+             pytest --junitxml=test-reports/junit.xml --html=test-reports/pytest_report.html --self-contained-html
+      - store_test_results:
+          path: test-reports
+      - store_artifacts:
+          path: test-reports
 workflows:
   build_and_test:
     jobs:
-      - build
-      - test:
-          requires:
-            - build
+      - run_tests
