@@ -1,6 +1,5 @@
 from app import app
 import pytest
-import unittest
 
 @pytest.fixture
 def client():
