@@ -14,12 +14,12 @@ jobs:
       - run: 
            name: Run test
            command: pytest
+      - jira/notify:
+            environment: staging
+            environment_type: staging
 workflows:
   run_tests:
     jobs:
       - run_tests:
           context: 
             - Jira
-          post-steps:
-            - jira/notify
-            
