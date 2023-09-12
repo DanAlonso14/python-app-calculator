@@ -18,7 +18,8 @@ workflows:
   run_tests:
     jobs:
       - run_tests:
-          context: JIRA_WEBHOOK_URL
+          context: 
+            - Jira
           post-steps:
             - jira/notify
             
