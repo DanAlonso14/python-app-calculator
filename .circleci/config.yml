@@ -18,8 +18,7 @@ jobs:
             environment: staging
             environment_type: staging
 workflows:
-  run_tests:
+  run_tests-workflow:
     jobs:
       - run_tests:
-          context: 
-            - Jira
+          context: Jira
